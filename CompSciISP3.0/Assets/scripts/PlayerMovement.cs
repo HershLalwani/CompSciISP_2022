@@ -10,10 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed = 12f;
     public float gravity = -9.81f;
-    public float jumpHeight = 1f;
+    public float jumpHeight = 2f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.1f;
     public LayerMask groundMask;
 
     Vector3 velocity;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(isGrounded && velocity.y < 0)
         {
-            velocity.y = -3f;
+            velocity.y = 0f;
         }
 
         float x = Input.GetAxis("Horizontal");
