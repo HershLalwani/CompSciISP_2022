@@ -167,9 +167,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
         else if(grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            
-            anim.SetFloat("vertical", verticalInput);
-            anim.SetFloat("horizontal", horizontalInput);
         }
 
         // in air
