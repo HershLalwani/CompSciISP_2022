@@ -37,7 +37,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
-    
+
+    public Animator anim;
 
     public Transform orientation;
 
@@ -56,7 +57,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
         crouching,
         air
     }
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -149,6 +149,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void MovePlayer()
     {
+        
+        
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -163,11 +165,18 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
         // on ground
         else if(grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            
+            anim.SetFloat("vertical", verticalInput);
+            anim.SetFloat("horizontal", horizontalInput);
+        }
 
         // in air
         else if(!grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
 
         // turn gravity off while on slope
         rb.useGravity = !OnSlope();
